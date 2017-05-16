@@ -24,7 +24,7 @@ class State{
 
 		~State();
 
-		bool quitRequested() const;
+		bool quitRequested() ;
 		void requestQuit();
 
 		void loadAssets();

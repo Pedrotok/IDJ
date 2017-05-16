@@ -9,7 +9,7 @@ State::State(std::string tsFile, std::string tmName) :
     // tileMap = *(new TileMap(tmName, &tileSet));
 }
 
-bool State::quitRequested() const{
+bool State::quitRequested() {
 	return varQuitRequested;
 }
 
@@ -31,11 +31,15 @@ void State::update(double dt){
 }
 
 void State::render(){
-	tileMap.render(0,0);
+    bg.render(0,0);
 
-	for(int i = 0; i < (int)objectArray.size(); i++){
-		objectArray[i]->render();
-	}
+    tileMap.renderLayer(0);
+
+    for(int i = 0; i < (int)objectArray.size(); i++){
+        objectArray[i]->render();
+    }
+
+	tileMap.renderLayer(1);
 }
 
 State::~State(){

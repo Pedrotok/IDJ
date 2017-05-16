@@ -42,11 +42,7 @@ void Sprite::setClip(int x, int y, int w, int h){
 }
 
 void Sprite::render(int x, int y){
-	SDL_Rect dstrect;
-	dstrect.x = x;
-	dstrect.y = y;
-	dstrect.w = width;
-	dstrect.h = height;
+	SDL_Rect dstrect = {x, y, clipRect.w, clipRect.h};
 
 	SDL_Renderer* renderer = Game::getInstance().getRenderer();
 

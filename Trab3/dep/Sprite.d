@@ -24,7 +24,8 @@ bin/Sprite.o: src/Sprite.cpp src/../include/Sprite.hpp \
  /usr/include/SDL2/SDL.h src/../include/Game.hpp src/../include/State.hpp \
  src/../include/Sprite.hpp src/../include/Face.hpp \
  src/../include/GameObject.hpp src/../include/Rect.hpp \
- src/../include/Vec2.hpp
+ src/../include/Vec2.hpp src/../include/TileMap.hpp \
+ src/../include/TileSet.hpp
 
 src/../include/Sprite.hpp:
 
@@ -131,3 +132,7 @@ src/../include/GameObject.hpp:
 src/../include/Rect.hpp:
 
 src/../include/Vec2.hpp:
+
+src/../include/TileMap.hpp:
+
+src/../include/TileSet.hpp:

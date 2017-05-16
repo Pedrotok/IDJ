@@ -27,21 +27,21 @@ void TileMap::setTileSet(TileSet* _tileSet){
 	tileSet = _tileSet;
 }
 
-int& TileMap::at(int x, int y, int z = 0){
+int& TileMap::at(int x, int y, int z){
 	int pos = (x*mapWidth + y) + z*mapWidth*mapHeight;
-	return pos;
+	return tileMatrix[pos];
 }
 
-void TileMap::render(int cameraX = 0, int cameraY = 0){
+void TileMap::render(int cameraX, int cameraY){
 	for(int i = 0; i < mapDepth; i++)
 		renderLayer(i,cameraX,cameraY);
 }
 
-void TileMap::renderLayer(int layer, int cameraX = 0, int cameraY = 0){
+void TileMap::renderLayer(int layer, int cameraX, int cameraY){
 	for(int i = layer*mapWidth*mapHeight, j = 0; i < (layer+1)*mapWidth*mapHeight; i++, j++){
 		if(tileMatrix[i] != -1){
-			int newX = (j%mapWidth)*mapHeight + cameraX;
-			int newY = (j/mapWidth)*mapWidth + cameraY;
+			int newX = (j%mapWidth)*tileSet->getTileWidth() - cameraX;
+      		int newY = (j/mapWidth)*tileSet->getTileHeight() - cameraY;
 			tileSet->render(tileMatrix[i],newX, newY);
 		}
 	}

@@ -15,9 +15,9 @@ class TileMap{
 		TileMap(std::string file, TileSet* _tileSet);
 		void load(std::string file);
 		void setTileSet(TileSet* _tileSet);
-		int& at(int x, int y, int z);
-		void render(int cameraX, int cameraY);
-		void renderLayer(int layer, int cameraX, int cameraY);
+		int& at(int x, int y, int z = 0);
+		void render(int cameraX = 0, int cameraY = 0);
+		void renderLayer(int layer, int cameraX = 0, int cameraY = 0);
 		int getWidth() const;
 		int getHeight() const;
 		int getDepth() const;

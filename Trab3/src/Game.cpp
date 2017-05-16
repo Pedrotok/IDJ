@@ -33,7 +33,7 @@ Game::Game(std::string _title, int _width, int _height){
 		printf("SDL CREATE WINDOW ERROR: %s\n", SDL_GetError());
 	}
 	// cria renderizador (vsync on)
-	renderer =  SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	renderer =  SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED );
 
 	if(renderer == NULL){
 		printf("SDL CREATE RENDERER ERROR: %s\n", SDL_GetError());
@@ -86,6 +86,8 @@ void Game::run(){
 
 		state->render();
 		SDL_RenderPresent(renderer);
+
+		SDL_Delay(33);
 	}
 }
 
