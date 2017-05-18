@@ -31,7 +31,7 @@ void State::update(double dt){
 }
 
 void State::render(){
-    bg.render(0,0);
+    // bg.render(0,0);
 
     tileMap.renderLayer(0);
 
