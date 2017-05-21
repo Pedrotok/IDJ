@@ -10,10 +10,11 @@
 
 class GameObject{
 	public:
-		GameObject(){}
 		int z;
+		float rotation;
 
 		Rect box;
+		GameObject(){rotation = 0;}
 		virtual ~GameObject(){};
 
 		virtual void update(float dt) = 0;

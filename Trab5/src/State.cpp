@@ -1,12 +1,18 @@
 #include "../include/State.hpp"
 #include "../include/InputManager.hpp"
 #include "../include/Camera.hpp"
+#include "../include/Alien.hpp"
+
+State* State::instance = NULL;
 
 State::State(std::string tsFile, std::string tmName) :
     varQuitRequested(false),
     bg("img/ocean.jpg"),
     tileSet(64,64,tsFile),
-    tileMap(tmName, &tileSet){ }
+    tileMap(tmName, &tileSet){
+        instance = this;
+        objectArray.emplace_back(new Alien(512,300,3,230));
+    }
 
 bool State::quitRequested() {
 	return varQuitRequested;
@@ -28,10 +34,6 @@ void State::update(double dt){
         varQuitRequested = true;
     }
 
-    if(IMInstance.keyPress(' ')){
-        addObject(IMInstance.getMouseX() + Camera::pos.x, IMInstance.getMouseY() + Camera::pos.y);
-    }
-
     for(int i = (int)objectArray.size() - 1; i >= 0; --i) {
         objectArray[i]->update(dt);
     }
@@ -45,22 +47,23 @@ void State::update(double dt){
 void State::render(){
     bg.render(0,0);
 
-    tileMap.renderLayer(0,Camera::pos.x/3.0, Camera::pos.y/3.0);
+    tileMap.renderLayer(0,Camera::pos.x, Camera::pos.y);
 
     for(int i = 0; i < (int)objectArray.size(); i++){
         objectArray[i]->render();
     }
 
-	tileMap.renderLayer(1,Camera::pos.x/2.0, Camera::pos.y/2.0);
+	tileMap.renderLayer(1,Camera::pos.x*2.0, Camera::pos.y*2.0);
 }
 
 State::~State(){
 	objectArray.clear();
 }
 
-void State::addObject(float mouseX, float mouseY){
-	double ang = rand()%360*acos(-1)/180;
-	float newX = cos(ang)*200 + mouseX;
-	float newY = sin(ang)*200 + mouseY;
-	objectArray.emplace_back(new Face(newX, newY));
+void State::addObject(GameObject* ptr){
+    objectArray.emplace_back(ptr);
+}
+
+State& State::getInstance(){
+    return *instance;
 }
